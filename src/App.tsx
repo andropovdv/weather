@@ -15,6 +15,7 @@ import { getCurrentWeather } from "./store/thunks/currentWeatherThunk";
 import { getForecast } from "./store/thunks/forecastThunk";
 import { getGeoIP } from "./store/thunks/geoipThunk";
 import { weatherIconSwitch } from "./utils/weaterCodeImg";
+import Gear from "./assets/Gear.svg";
 
 type Props = {};
 
@@ -38,7 +39,10 @@ const App = (props: Props) => {
         dispatch(getOsmCityName(+geoip.latitude, +geoip.longitude)),
         dispatch(getCurrentWeather(+geoip.latitude, +geoip.longitude)),
         dispatch(getForecast(+geoip.latitude, +geoip.longitude)),
-      ]).then(() => setLoading(false));
+      ]).then(() => {
+        document.title = `Погода`;
+        setLoading(false);
+      });
     }
   }, [geoip]);
 
@@ -46,8 +50,8 @@ const App = (props: Props) => {
 
   if (loading) {
     return (
-      <div className={classes.container} style={{ color: "#FFF" }}>
-        Loading
+      <div className={classes.container_loading}>
+        <img src={Gear} alt="Loading..." style={{ margin: "auto" }} />
       </div>
     );
   }
