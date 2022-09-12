@@ -1,0 +1,38 @@
+.container {
+  box-sizing: border-box;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 1024px;
+  height: 500px;
+  background-color: #0d1117;
+  border-radius: 5px;
+  padding: 5px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 15px 0;
+}
+
+.block {
+  border-radius: 20px;
+}
+
+.today {
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+  gap: 0 10px;
+}
+
+.forecast {
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0 10px;
+}

@@ -1,0 +1,47 @@
+.forecast__days {
+  padding: 10px;
+  background-color: #2e3035;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 211px;
+  justify-content: space-between;
+}
+
+.forecast__days:hover {
+  filter: drop-shadow(0px 3px 20px rgba(5, 5, 5, 0.28));
+}
+
+.days__title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.days__subtitle {
+  color: #939cb0;
+  font-size: 17px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.days__img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 5px;
+}
+.days__temp {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+}
+.days__temp_night {
+  color: #939cb0;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.days__sky {
+  color: #939cb0;
+  font-size: 13px;
+  font-weight: 400;
+}

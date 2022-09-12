@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="block today">
+        <div class="today__current">
+          <div class="today__context">
+            <img src="./assets/sun.svg" />
+            <div class="context__title">
+              <div class="title__temp">+20&deg;</div>
+              <div class="title__footer">Сейчас</div>
+            </div>
+          </div>
+          <div class="today__footer">
+            <div class="footer__text">Город: Н.Новгород</div>
+            <div class="footer__text">Время: 17:36</div>
+          </div>
+        </div>
+        <div class="today__detail">
+          <div class="detail__title">Сегодня: 01 сентября 2022 года</div>
+          <ul class="detail__list">
+            <li>
+              <img src="./assets/thermometer.svg" />
+              <span>Температура</span>
+            </li>
+            <li>
+              <img src="./assets/humidity.svg" />
+              <span>Давление</span>
+            </li>
+            <li>
+              <img src="./assets/Evaporator.svg" />
+              <span>Осадки</span>
+            </li>
+            <li>
+              <img src="./assets/wind.svg" />
+              <span>Ветер</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="block forecast">
+        <div class="forecast__days">
+          <div class="days__title">Завтра</div>
+          <div class="days__subtitle">02 сен</div>
+          <img class="days__img" src="./assets/sun.svg" />
+          <div class="days__temp">+18&deg;</div>
+          <div class="days__temp-night">+15&deg;</div>
+          <div class="days__sky">Облачно</div>
+        </div>
+        <div class="forecast__days">1</div>
+        <div class="forecast__days">1</div>
+        <div class="forecast__days">1</div>
+        <div class="forecast__days">1</div>
+        <div class="forecast__days">1</div>
+      </div>
+    </div>
+  </body>
+</html>
