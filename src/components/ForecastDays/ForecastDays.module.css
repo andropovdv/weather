@@ -45,3 +45,26 @@
   font-size: 13px;
   font-weight: 400;
 }
+
+@media (max-width: 425px) {
+  .forecast__days {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+  }
+  .days__r {
+    text-align: right;
+    width: 30%;
+  }
+  .days__l {
+    width: 30%;
+  }
+  .days__subtitle {
+    margin-bottom: 0;
+  }
+  .days__img {
+    margin-bottom: 0;
+  }
+}

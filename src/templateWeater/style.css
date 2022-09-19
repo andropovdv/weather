@@ -3,6 +3,10 @@ html {
   font-family: "Montserrat", sans-serif;
 }
 
+body {
+  margin: 0;
+}
+
 .container {
   box-sizing: border-box;
   position: absolute;
@@ -23,6 +27,16 @@ html {
   gap: 15px 0;
 }
 
+@media (max-width: 425px) {
+  .container {
+    position: static;
+    display: block;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .block {
   border-radius: 20px;
   /* background-color: #00fa9a; */
@@ -35,19 +49,46 @@ html {
   gap: 0 10px;
 }
 
+@media (max-width: 425px) {
+  .today {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 0fr 0fr;
+    gap: 10px 0;
+  }
+}
+
 .today__current {
   border-radius: 20px;
   background-color: #4f4f4f;
   box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
   padding: 20px;
   display: grid;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 1fr 0.5fr;
 }
+
+/* @media (max-width: 425px) {
+  .today__current {
+    display: block;
+  }
+} */
 
 .today__context {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.today__context img {
+  width: 110px;
+  height: 110px;
+}
+
+@media (max-width: 425px) {
+  .today__current img {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .context__title {
@@ -56,10 +97,17 @@ html {
   justify-content: space-around;
   align-items: center;
 }
+
 .title__temp {
   font-size: 80px;
   font-weight: 500;
   color: #4793ff;
+}
+
+@media (max-width: 425px) {
+  .title__temp {
+    font-size: 50px;
+  }
 }
 .title__footer {
   font-size: 36px;
@@ -81,6 +129,12 @@ html {
   border-radius: 20px;
   background-color: #4f4f4f;
   padding: 10px;
+}
+
+@media (max-width: 425px) {
+  .today__detail {
+    margin-bottom: 10px;
+  }
 }
 
 .detail__title {
@@ -121,6 +175,14 @@ html {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 0 10px;
+}
+
+@media (max-width: 425px) {
+  .forecast {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 10px 0;
+  }
 }
 
 .forecast__days {
@@ -165,4 +227,25 @@ html {
   color: #939cb0;
   font-size: 13px;
   font-weight: 400;
+}
+
+@media (max-width: 425px) {
+  .forecast__days {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .days__r {
+    text-align: right;
+    width: 30%;
+  }
+  .days__l {
+    width: 30%;
+  }
+  .days__subtitle {
+    margin-bottom: 0;
+  }
+  .days__img {
+    margin-bottom: 0;
+  }
 }

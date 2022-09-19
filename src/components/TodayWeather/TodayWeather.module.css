@@ -17,6 +17,13 @@
   height: 110px;
 }
 
+@media (max-width: 425px) {
+  .today__current img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
 .context__title {
   display: flex;
   flex-direction: column;
@@ -28,6 +35,13 @@
   font-weight: 500;
   color: #4793ff;
 }
+
+@media (max-width: 425px) {
+  .title__temp {
+    font-size: 50px;
+  }
+}
+
 .title__footer {
   font-size: 36px;
   color: #fff;
@@ -48,4 +62,10 @@
   border-radius: 20px;
   background-color: #4f4f4f;
   padding: 10px;
+}
+
+@media (max-width: 425px) {
+  .today__detail {
+    margin-bottom: 10px;
+  }
 }

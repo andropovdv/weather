@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import classes from "./App.module.css";
+import lightTheme from "./AppLight.module.css";
 import { Forecast } from "./components/Forecast/Forecast";
 import { TodayWeater } from "./components/TodayWeather/TodayWeather";
 import { TodayWeaterDetail } from "./components/TodayWeatherDetail/TodayWeatherDetail";
@@ -19,22 +20,63 @@ import Gear from "./assets/Gear.svg";
 
 type Props = {};
 
+type geo = {
+  lat: number;
+  log: number;
+};
+
+type mode = "dark" | "light";
+
 const App = (props: Props) => {
   const [loading, setLoading] = useState(true);
+  const [geo, setGeo] = useState<geo>({ lat: 0, log: 0 });
+
   const { geoip } = useAppSelector(selectGepIp);
   const { city } = useAppSelector(selectCityRus);
   const { current } = useAppSelector(selectCurrentWeather);
   const { forecast } = useAppSelector(selectForecast);
 
   const dispatch = useAppDispatch();
+  // dispatch(getGeoIP());
+
+  const mode: mode = "light";
+
+  let theme = classes;
+
+  // if (mode === "light") {
+  //   theme = lightTheme;
+  // }
 
   useEffect(() => {
-    dispatch(getGeoIP());
+    // todo геолокация продумать
+    // dispatch(getGeoIP());
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // console.log(position);
+        setGeo({
+          lat: position.coords.latitude,
+          log: position.coords.longitude,
+        });
+      },
+      (error) => {
+        console.log(error.code);
+
+        if (error.code === 1) {
+          dispatch(getGeoIP());
+        }
+      }
+      // {
+      //   timeout: 10000,
+      //   maximumAge: 10000,
+      //   enableHighAccuracy: true,
+      // }
+    );
   }, []);
 
   useEffect(() => {
-    if (geoip.city) {
-      // dispatch(getCiyRus(geoip.city));
+    if (geoip.ip) {
+      console.log("geoIp");
       Promise.all([
         dispatch(getOsmCityName(+geoip.latitude, +geoip.longitude)),
         dispatch(getCurrentWeather(+geoip.latitude, +geoip.longitude)),
@@ -43,8 +85,18 @@ const App = (props: Props) => {
         document.title = `Погода`;
         setLoading(false);
       });
+    } else if (geo.lat !== 0 && geo.log !== 0) {
+      console.log("geoNavigate");
+      Promise.all([
+        dispatch(getOsmCityName(geo.lat, geo.log)),
+        dispatch(getCurrentWeather(geo.lat, geo.log)),
+        dispatch(getForecast(geo.lat, geo.log)),
+      ]).then(() => {
+        document.title = `Погода`;
+        setLoading(false);
+      });
     }
-  }, [geoip]);
+  }, [geoip, geo]);
 
   const daysWeather = forecast.slice(1, 7);
 
@@ -58,7 +110,8 @@ const App = (props: Props) => {
 
   return (
     <>
-      <div className={classes.container}>
+      <div className={theme.container}>
+        <div className={theme.header}>Header</div>
         <div className={classes.today}>
           <TodayWeater
             city={city.address?.city || "Неопределен"}

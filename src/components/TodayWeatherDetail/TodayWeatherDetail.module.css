@@ -4,6 +4,12 @@
   padding: 10px;
 }
 
+@media (max-width: 425px) {
+  .today__detail {
+    margin-bottom: 10px;
+  }
+}
+
 .detail__title {
   font-size: 36px;
   color: #fff;
