@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { ThemeProvider } from "styled-components";
 import classes from "./App.module.css";
-import lightTheme from "./AppLight.module.css";
 import { Forecast } from "./components/Forecast/Forecast";
 import { TodayWeater } from "./components/TodayWeather/TodayWeather";
 import { TodayWeaterDetail } from "./components/TodayWeatherDetail/TodayWeatherDetail";
@@ -17,6 +17,19 @@ import { getForecast } from "./store/thunks/forecastThunk";
 import { getGeoIP } from "./store/thunks/geoipThunk";
 import { weatherIconSwitch } from "./utils/weaterCodeImg";
 import Gear from "./assets/Gear.svg";
+import Brightness from "./assets/brightness.svg";
+import {
+  ForecastBlock,
+  Header,
+  Loader,
+  TodayWeaterBlock,
+  Wrapper,
+} from "./sylesComponent/StyledApp";
+
+import { GlobalStyles } from "./theme/globalStyles";
+import { useTheme } from "./hooks/useTheme";
+import { getThemeLS } from "./utils/storageTheme";
+import { Theme } from "./theme/types";
 
 type Props = {};
 
@@ -24,8 +37,6 @@ type geo = {
   lat: number;
   log: number;
 };
-
-type mode = "dark" | "light";
 
 const App = (props: Props) => {
   const [loading, setLoading] = useState(true);
@@ -39,13 +50,26 @@ const App = (props: Props) => {
   const dispatch = useAppDispatch();
   // dispatch(getGeoIP());
 
-  const mode: mode = "light";
+  const { theme, themeLoaded, setMode } = useTheme();
+  const [selectedTheme, setSelectedTheme] = useState(theme);
 
-  let theme = classes;
+  const themeFromStore = getThemeLS("all-themes");
 
-  // if (mode === "light") {
-  //   theme = lightTheme;
-  // }
+  const changeTheme = () => {
+    let newTheme: Theme;
+    if (theme.name === "dark") {
+      newTheme = themeFromStore?.data["light"]!;
+    } else {
+      newTheme = themeFromStore?.data["dark"]!;
+    }
+    setMode(newTheme);
+    setSelectedTheme(newTheme);
+    console.log("Change theme", theme.name, " ", newTheme.name);
+  };
+
+  useEffect(() => {
+    setSelectedTheme(theme);
+  }, [themeLoaded]);
 
   useEffect(() => {
     // todo геолокация продумать
@@ -53,7 +77,6 @@ const App = (props: Props) => {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        // console.log(position);
         setGeo({
           lat: position.coords.latitude,
           log: position.coords.longitude,
@@ -102,28 +125,60 @@ const App = (props: Props) => {
 
   if (loading) {
     return (
-      <div className={classes.container_loading}>
-        <img src={Gear} alt="Loading..." style={{ margin: "auto" }} />
-      </div>
+      <>
+        {themeLoaded && (
+          <ThemeProvider theme={selectedTheme}>
+            <GlobalStyles />
+            <Loader>
+              <img src={Gear} alt="Loading..." style={{ margin: "auto" }} />
+            </Loader>
+          </ThemeProvider>
+        )}
+      </>
     );
   }
 
+  const inLocation = city.address;
+  const location =
+    inLocation.city ||
+    inLocation.town ||
+    inLocation.village ||
+    inLocation.hamlet ||
+    inLocation.isolated_dwellin ||
+    inLocation.locality ||
+    inLocation.allotments ||
+    inLocation.suburb ||
+    inLocation.quarter ||
+    inLocation.neighbourhood ||
+    inLocation.island ||
+    inLocation.island;
+
   return (
     <>
-      <div className={theme.container}>
-        <div className={theme.header}>Header</div>
-        <div className={classes.today}>
-          <TodayWeater
-            city={city.address?.city || "Неопределен"}
-            temperature={current.temperature}
-            weatherImg={weatherIconSwitch(current.weathercode)}
-          />
-          <TodayWeaterDetail weatherData={forecast[0] || []} />
-        </div>
-        <div className={classes.forecast}>
-          <Forecast weatherData={daysWeather} />
-        </div>
-      </div>
+      {themeLoaded && (
+        <ThemeProvider theme={selectedTheme}>
+          <GlobalStyles />
+          <Wrapper>
+            <Header>
+              {/* <div className={classes.header}> */}
+              <a href="https://open-meteo.com">open-meteo.com</a>
+              <img src={Brightness} alt="theme" onClick={() => changeTheme()} />
+              {/* </div> */}
+            </Header>
+            <TodayWeaterBlock>
+              <TodayWeater
+                city={location || "Неопределен"}
+                temperature={current.temperature}
+                weatherImg={weatherIconSwitch(current.weathercode)}
+              />
+              <TodayWeaterDetail weatherData={forecast[0] || []} />
+            </TodayWeaterBlock>
+            <ForecastBlock>
+              <Forecast weatherData={daysWeather} />
+            </ForecastBlock>
+          </Wrapper>
+        </ThemeProvider>
+      )}
     </>
   );
 };

@@ -6,6 +6,11 @@ import wing from "../../assets/wind.svg";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { ForecastWork } from "../../store/types/IForecast";
+import {
+  TodayForecast,
+  TodayForecastList,
+  TodayForecastTitle,
+} from "../../sylesComponent/StyledTodayForecast";
 
 type Props = {
   weatherData: ForecastWork;
@@ -38,16 +43,16 @@ export const TodayWeaterDetail = ({ weatherData }: Props) => {
   const res = arr[windDidection % 16];
 
   return (
-    <div className={classes.today__detail}>
-      <div className={classes.detail__title}>{`Сегодня: ${now}`}</div>
-      <ul className={classes.detail__list}>
+    <TodayForecast>
+      <TodayForecastTitle>{`Сегодня: ${now}`}</TodayForecastTitle>
+      <TodayForecastList>
         <li>
           <img src={termometer} alt="Температура" />
           <span>
             {`Температура: ${
               weatherData.temperature_2m_max || "--"
             }º  , ощущается
-             как ${weatherData.apparent_temperature_max}º` || "--"}
+                 как ${weatherData.apparent_temperature_max}º` || "--"}
           </span>
         </li>
         <li>
@@ -66,7 +71,7 @@ export const TodayWeaterDetail = ({ weatherData }: Props) => {
           <img src={wing} alt="Ветер" />
           <span>{`Ветер: ${res} скоростью ${weatherData.windspeed_10m_max} км/ч`}</span>
         </li>
-      </ul>
-    </div>
+      </TodayForecastList>
+    </TodayForecast>
   );
 };

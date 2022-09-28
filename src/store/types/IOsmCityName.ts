@@ -5,6 +5,16 @@ export interface Address {
   suburb: string;
   city_district: string;
   city: string;
+  town?: string;
+  village?: string;
+  hamlet?: string;
+  isolated_dwellin?: string;
+  locality?: string;
+  allotments?: string;
+  quarter?: string;
+  neighbourhood?: string;
+  island?: string;
+  islet?: string;
   "ISO3166-2-lvl6": string;
   state: string;
   "ISO3166-2-lvl4": string;

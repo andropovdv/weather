@@ -4,14 +4,22 @@ import { Provider } from "react-redux";
 import App from "./App";
 import "./index.css";
 import { store } from "./store/store";
+import { schema as themes } from "./theme/schema";
+import { setThemeLS } from "./utils/storageTheme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
+
+const Index = () => {
+  setThemeLS("all-themes", themes);
+  return (
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>
+  );
+};
+
+root.render(<Index />);

@@ -1,5 +1,16 @@
 import classes from "./ForecastDays.module.css";
 import { ForecastWork } from "../../store/types/IForecast";
+import {
+  ForecastDay,
+  ForecastImage,
+  ForecastLeftMobile,
+  ForecastRightMobile,
+  ForecastSkyDesktop,
+  ForecastSubtitle,
+  ForecastTemperature,
+  ForecastTemperatureNight,
+  ForecastTitle,
+} from "../../sylesComponent/StyledForecastDays";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { weatherIconSwitch } from "../../utils/weaterCodeImg";
@@ -17,8 +28,6 @@ export const ForecastDays = ({ weatherData }: Props) => {
 
   const weatherText = weatherCodeText(weatherData.weathercode);
 
-  // const windowWidth = document.documentElement.scrollWidth;
-
   const [widthScreen, setWidthScreen] = useState<number>(0);
 
   const detectSize = () => {
@@ -34,40 +43,40 @@ export const ForecastDays = ({ weatherData }: Props) => {
   }, [widthScreen]);
 
   return (
-    <div className={classes.forecast__days}>
+    <ForecastDay>
       {widthScreen <= 425 ? (
         <>
-          <div className={classes.days__l}>
-            <div className={classes.days__title}>{`${now}`}</div>
-            <div className={classes.days__subtitle}>{`${nowData}`}</div>
-          </div>
+          <ForecastLeftMobile>
+            <ForecastTitle>{`${now}`}</ForecastTitle>
+            <ForecastSubtitle>{`${nowData}`}</ForecastSubtitle>
+          </ForecastLeftMobile>
           <img className={classes.days__img} src={weatherCodeImg} alt="sun" />
-          <div className={classes.days__r}>
-            <div className={classes.days__temp}>{`${Math.round(
-              weatherData.temperature_2m_max
-            )}º`}</div>
-            <div className={classes.days__temp_night}>{`${Math.round(
-              weatherData.temperature_2m_min
-            )}º`}</div>
-            <div className={classes.days__sky}>{`${weatherText}`}</div>
-          </div>
+          <ForecastRightMobile>
+            <ForecastTemperature>
+              {`${Math.round(weatherData.temperature_2m_max)}º`}
+            </ForecastTemperature>
+            <ForecastTemperatureNight>
+              {`${Math.round(weatherData.temperature_2m_min)}º`}
+            </ForecastTemperatureNight>
+            <ForecastSkyDesktop>{`${weatherText}`}</ForecastSkyDesktop>
+          </ForecastRightMobile>
         </>
       ) : (
         <>
-          <div className={classes.days__block}>
-            <div className={classes.days__title}>{`${now}`}</div>
-            <div className={classes.days__subtitle}>{`${nowData}`}</div>
-            <img className={classes.days__img} src={weatherCodeImg} alt="sun" />
-            <div className={classes.days__temp}>{`${Math.round(
-              weatherData.temperature_2m_max
-            )}º`}</div>
-            <div className={classes.days__temp_night}>{`${Math.round(
-              weatherData.temperature_2m_min
-            )}º`}</div>
+          <div>
+            <ForecastTitle>{`${now}`}</ForecastTitle>
+            <ForecastSubtitle>{`${nowData}`}</ForecastSubtitle>
+            <ForecastImage src={weatherCodeImg} />
+            <ForecastTemperature>
+              {`${Math.round(weatherData.temperature_2m_max)}º`}
+            </ForecastTemperature>
+            <ForecastTemperatureNight>
+              {`${Math.round(weatherData.temperature_2m_min)}º`}
+            </ForecastTemperatureNight>
           </div>
-          <div className={classes.days__sky}>{`${weatherText}`}</div>
+          <ForecastSkyDesktop>{`${weatherText}`}</ForecastSkyDesktop>
         </>
       )}
-    </div>
+    </ForecastDay>
   );
 };
