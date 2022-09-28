@@ -43,5 +43,5 @@ export const CurrentTitleTemperature = styled.div`
 
 export const CurrentTitleFooter = styled.div`
   font-size: 36px;
-  color: ${(props) => props.theme.colors.current};
+  color: ${(props) => props.theme.colors.currentTitle};
 `;

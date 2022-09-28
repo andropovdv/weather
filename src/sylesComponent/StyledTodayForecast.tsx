@@ -13,7 +13,7 @@ export const TodayForecast = styled.div`
 
 export const TodayForecastTitle = styled.div`
   font-size: 36px;
-  color: ${(props) => props.theme.colors.current};
+  color: ${(props) => props.theme.colors.currentTitle};
   margin-bottom: 20px;
   text-align: center;
 `;

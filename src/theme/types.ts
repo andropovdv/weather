@@ -2,6 +2,7 @@ export interface Colors {
   body: string;
   thisDayBackground: string;
   current: string;
+  currentTitle: string;
   forecastDay: string;
   forecastSky: string;
   forecastTitle: string;
