@@ -19,16 +19,17 @@ import { useEffect, useState } from "react";
 
 type Props = {
   weatherData: ForecastWork;
+  screenWidth: number;
 };
 
-export const ForecastDays = ({ weatherData }: Props) => {
+export const ForecastDays = ({ weatherData, screenWidth }: Props) => {
   const now = dayjs(weatherData.time).locale("ru").format("dd");
   const nowData = dayjs(weatherData.time).locale("ru").format("DD MMM");
   const weatherCodeImg = weatherIconSwitch(weatherData.weathercode);
 
   const weatherText = weatherCodeText(weatherData.weathercode);
 
-  const [widthScreen, setWidthScreen] = useState<number>(0);
+  const [widthScreen, setWidthScreen] = useState<number>(screenWidth);
 
   const detectSize = () => {
     setWidthScreen(document.documentElement.scrollWidth);
@@ -41,6 +42,8 @@ export const ForecastDays = ({ weatherData }: Props) => {
       window.removeEventListener("resize", detectSize);
     };
   }, [widthScreen]);
+
+  console.log("widthScreen", widthScreen);
 
   return (
     <ForecastDay>

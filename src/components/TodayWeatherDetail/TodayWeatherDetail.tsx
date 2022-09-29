@@ -1,4 +1,3 @@
-import classes from "./TodayWeatherDetail.module.css";
 import termometer from "../../assets/thermometer.svg";
 import humidity from "../../assets/humidity.svg";
 import evaporator from "../../assets/Evaporator.svg";
@@ -69,7 +68,7 @@ export const TodayWeaterDetail = ({ weatherData }: Props) => {
         </li>
         <li>
           <img src={wing} alt="Ветер" />
-          <span>{`Ветер: ${res} скоростью ${weatherData.windspeed_10m_max} км/ч`}</span>
+          <span>{`Ветер: '${res}' скоростью ${weatherData.windspeed_10m_max} км/ч`}</span>
         </li>
       </TodayForecastList>
     </TodayForecast>

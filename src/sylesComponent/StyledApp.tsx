@@ -43,7 +43,7 @@ export const Header = styled.div`
     cursor: pointer;
 
     filter: ${(props) =>
-      props.theme.name == "dark"
+      props.theme.name === "dark"
         ? `
       invert(97%) sepia(48%) saturate(0%) hue-rotate(20deg)
       brightness(103%) contrast(103%)
@@ -51,8 +51,10 @@ export const Header = styled.div`
         : `
       invert(68%) sepia(33%) saturate(175%) hue-rotate(183deg) brightness(87%) contrast(80%);
     `};
-    /* filter: invert(97%) sepia(48%) saturate(0%) hue-rotate(20deg)
-      brightness(103%) contrast(103%); */
+  }
+
+  @media (max-width: 425px) {
+    margin-bottom: 10px;
   }
 
   a {

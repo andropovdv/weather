@@ -18,7 +18,7 @@ export const TodayForecastTitle = styled.div`
   text-align: center;
 `;
 
-export const TodayForecastList = styled.li`
+export const TodayForecastList = styled.ul`
   list-style: none;
   padding-left: 0;
   color: #939cb0;

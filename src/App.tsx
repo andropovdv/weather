@@ -1,6 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import classes from "./App.module.css";
 import { Forecast } from "./components/Forecast/Forecast";
 import { TodayWeater } from "./components/TodayWeather/TodayWeather";
 import { TodayWeaterDetail } from "./components/TodayWeatherDetail/TodayWeatherDetail";
@@ -123,6 +123,10 @@ const App = (props: Props) => {
 
   const daysWeather = forecast.slice(1, 7);
 
+  const screenWidth = document.documentElement.scrollWidth;
+
+  console.log("width: ", document.documentElement.scrollWidth);
+
   if (loading) {
     return (
       <>
@@ -160,10 +164,8 @@ const App = (props: Props) => {
           <GlobalStyles />
           <Wrapper>
             <Header>
-              {/* <div className={classes.header}> */}
               <a href="https://open-meteo.com">open-meteo.com</a>
               <img src={Brightness} alt="theme" onClick={() => changeTheme()} />
-              {/* </div> */}
             </Header>
             <TodayWeaterBlock>
               <TodayWeater
@@ -174,7 +176,7 @@ const App = (props: Props) => {
               <TodayWeaterDetail weatherData={forecast[0] || []} />
             </TodayWeaterBlock>
             <ForecastBlock>
-              <Forecast weatherData={daysWeather} />
+              <Forecast weatherData={daysWeather} screenWidth={screenWidth} />
             </ForecastBlock>
           </Wrapper>
         </ThemeProvider>
