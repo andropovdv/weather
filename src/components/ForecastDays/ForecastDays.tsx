@@ -43,8 +43,6 @@ export const ForecastDays = ({ weatherData, screenWidth }: Props) => {
     };
   }, [widthScreen]);
 
-  console.log("widthScreen", widthScreen);
-
   return (
     <ForecastDay>
       {widthScreen <= 425 ? (

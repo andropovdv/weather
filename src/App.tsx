@@ -18,6 +18,8 @@ import { getGeoIP } from "./store/thunks/geoipThunk";
 import { weatherIconSwitch } from "./utils/weaterCodeImg";
 import Gear from "./assets/Gear.svg";
 import Brightness from "./assets/brightness.svg";
+import GpsIcon from "./assets/gps.svg";
+import WirelessIcon from "./assets/wireless.svg";
 import {
   ForecastBlock,
   Header,
@@ -64,7 +66,6 @@ const App = (props: Props) => {
     }
     setMode(newTheme);
     setSelectedTheme(newTheme);
-    console.log("Change theme", theme.name, " ", newTheme.name);
   };
 
   useEffect(() => {
@@ -125,8 +126,6 @@ const App = (props: Props) => {
 
   const screenWidth = document.documentElement.scrollWidth;
 
-  console.log("width: ", document.documentElement.scrollWidth);
-
   if (loading) {
     return (
       <>
@@ -165,7 +164,20 @@ const App = (props: Props) => {
           <Wrapper>
             <Header>
               <a href="https://open-meteo.com">open-meteo.com</a>
-              <img src={Brightness} alt="theme" onClick={() => changeTheme()} />
+
+              <div>
+                {geoip.ip ? (
+                  <img src={WirelessIcon} alt="Wireless" />
+                ) : (
+                  <img src={GpsIcon} alt="Gps" />
+                )}
+                <img
+                  src={Brightness}
+                  alt="theme"
+                  style={{ marginLeft: "5px" }}
+                  onClick={() => changeTheme()}
+                />
+              </div>
             </Header>
             <TodayWeaterBlock>
               <TodayWeater

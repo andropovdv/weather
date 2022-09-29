@@ -40,7 +40,7 @@ export const Header = styled.div`
   img {
     width: 25px;
     height: 25px;
-    cursor: pointer;
+    cursor: auto;
 
     filter: ${(props) =>
       props.theme.name === "dark"
@@ -51,6 +51,12 @@ export const Header = styled.div`
         : `
       invert(68%) sepia(33%) saturate(175%) hue-rotate(183deg) brightness(87%) contrast(80%);
     `};
+  }
+
+  img:last-child {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
   }
 
   @media (max-width: 425px) {
@@ -75,6 +81,18 @@ export const Loader = styled.div`
   height: 500px;
   background-color: ${(props) => props.theme.colors.body};
 
+  img {
+    filter: ${(props) =>
+      props.theme.name === "dark"
+        ? `
+      invert(97%) sepia(48%) saturate(0%) hue-rotate(20deg)
+      brightness(103%) contrast(103%)
+    `
+        : `
+      invert(68%) sepia(33%) saturate(175%) hue-rotate(183deg) brightness(87%) contrast(80%);
+    `};
+  }
+
   border-radius: 5px;
   padding: 5px;
 
@@ -92,6 +110,16 @@ export const Loader = styled.div`
     img {
       display: block;
       margin: 0 auto;
+
+      filter: ${(props) =>
+        props.theme.name === "dark"
+          ? `
+      invert(97%) sepia(48%) saturate(0%) hue-rotate(20deg)
+      brightness(103%) contrast(103%)
+    `
+          : `
+      invert(68%) sepia(33%) saturate(175%) hue-rotate(183deg) brightness(87%) contrast(80%);
+    `};
     }
   }
 `;
