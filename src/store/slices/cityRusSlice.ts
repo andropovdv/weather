@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IRusCity } from "../types";
 import { ICityName } from "../types/IOsmCityName";
 
 interface cityRusState {

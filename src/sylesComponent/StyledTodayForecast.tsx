@@ -16,6 +16,10 @@ export const TodayForecastTitle = styled.div`
   color: ${(props) => props.theme.colors.currentTitle};
   margin-bottom: 20px;
   text-align: center;
+
+  @media (max-width: 425px) {
+    font-size: 24px;
+  }
 `;
 
 export const TodayForecastList = styled.ul`
